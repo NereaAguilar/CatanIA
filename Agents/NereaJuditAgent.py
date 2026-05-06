@@ -5,20 +5,17 @@ from Classes.TradeOffer import TradeOffer
 from Interfaces.AgentInterface import AgentInterface
 
 from Classes.Board import Board
-from Classes.DevelopmentCards import *
+from Classes.DevelopmentCards import * # type: ignore
 from Classes.Hand import Hand
 
 
-class AgentInterface:
+class NereaJuditAgent(AgentInterface):
     """
     Interfaz que implementa a un agente
     """
 
     def __init__(self, agent_id):
-        self.hand = Hand()
-        self.board = Board()
-        self.development_cards_hand = DevelopmentCardsHand()
-        self.id = agent_id
+        super().__init__(agent_id)
 
     # Los triggers son llamados por el GameDirector las veces que sean necesarias hasta que devuelvan null
     #  o el GameDirector le niegue continuar el trigger
@@ -69,12 +66,12 @@ class AgentInterface:
         # y así bloquear a un rival o desbloquear nuestros propios recursos.
         # USO IA: No tenía claro qué hacer con las cartas en este turno, así que consulté cómo usarlas correctamente.
         knights = self.development_cards_hand.find_card_by_effect(
-            DevelopmentCardConstants.KNIGHT_EFFEC
+            DevelopmentCardConstants.KNIGHT_EFFECT
         )
         
         if knights:
-            print("Juego carta de soldado al inicio")
-        return knights[0]
+            #print("Juego carta de soldado al inicio")
+            return knights[0]
     
         return None
 
@@ -143,7 +140,7 @@ class AgentInterface:
         )
         
         if knights:
-            print("Juego carta de soldado")
+            #print("Juego carta de soldado")
             return knights[0]
         
         # Tenemos CARTA CONTRUCCION DE CARRETERA
@@ -152,7 +149,7 @@ class AgentInterface:
         )
         
         if road_building:
-            print("Juego carta de construcción de carreteras")
+            #print("Juego carta de construcción de carreteras")
             return road_building[0]
 
         # Tenemos CARTA AÑO ABUNDANCIA
@@ -161,7 +158,7 @@ class AgentInterface:
         )
         
         if year_of_plenty:
-            print("Juego carta de año de abundancia")
+            #print("Juego carta de año de abundancia")
             return year_of_plenty[0]
 
         # Tenemos MONOPOLIO
@@ -170,7 +167,7 @@ class AgentInterface:
         )
         
         if monopoly:
-            print("Juego carta de monopolio")
+            #print("Juego carta de monopolio")
             return monopoly[0]
 
         return None
@@ -256,7 +253,7 @@ class AgentInterface:
 
             if valid_nodes:
                 nodo = valid_nodes[0]
-                print("Construyo ciudad en:", nodo)
+                #print("Construyo ciudad en:", nodo)
 
                 return {
                     "building": BuildConstants.CITY,
@@ -270,7 +267,7 @@ class AgentInterface:
 
             if valid_nodes:
                 nodo = valid_nodes[0]
-                print("Construyo un pueblo en:", nodo)
+                #print("Construyo un pueblo en:", nodo)
 
                 return {
                     "building": BuildConstants.TOWN,
@@ -280,7 +277,7 @@ class AgentInterface:
             
         # CARTA DE DESARROLLO
         if self.hand.resources.has_more(BuildConstants.CARD):
-            print("Compro carta de desarrollo")
+            #print("Compro carta de desarrollo")
 
             return {
                 "building": BuildConstants.CARD,
@@ -294,7 +291,7 @@ class AgentInterface:
 
             if valid_roads:
                 road = valid_roads[0]
-                print("Construyo una carretera entre:", road["starting_node"], "y", road["finishing_node"])
+                #print("Construyo una carretera entre:", road["starting_node"], "y", road["finishing_node"])
 
                 return {
                     "building": BuildConstants.ROAD,
