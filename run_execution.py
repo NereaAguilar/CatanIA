@@ -8,9 +8,10 @@ from Agents.EdoAgent import EdoAgent as ea
 from Agents.PabloAleixAlexAgent import PabloAleixAlexAgent as paaa
 from Agents.SigmaAgent import SigmaAgent as sa
 from Agents.TristanAgent import TristanAgent as ta
+from Agents.NereaJuditAgent import NereaJuditAgent as nja
 
 from Managers.GameDirector import GameDirector
-AGENTS = [ra, aha, apa, apja]
+AGENTS = [nja, ra, aha, apa]
 
 def main():
     """
@@ -21,7 +22,7 @@ def main():
     El fitness se determina actualmente por si el 'chosen_agent' gana la partida.
     """
     all_agents = AGENTS  # Lista de todos los agentes participantes en la partida.
-    chosen_agent = aha   # Agente específico cuyo rendimiento se está evaluando.
+    chosen_agent = nja   # Agente específico cuyo rendimiento se está evaluando.
 
     # Ejemplo de ejecuciÃ³n
     try:
@@ -46,9 +47,21 @@ def main():
 
 if __name__ == "__main__":
     print("Iniciando ejecución del script de simulación de Catan...")
-    resultado_fitness = main()
-    
-    if resultado_fitness is not None:
-        print(f"Ejecución completada. Fitness final obtenido: {resultado_fitness}")
-    else:
-        print("La ejecución de main() no produjo un resultado de fitness cuantificable o finalizó prematuramente debido a un error.")
+
+    victorias = 0
+    partidas = 10
+
+    for i in range(partidas):
+        print(f"\n--- Partida {i + 1} ---")
+
+        resultado_fitness = main()
+
+        if resultado_fitness is not None:
+            victorias += resultado_fitness
+        else:
+            print("Error al ejecutar una partida")
+
+    print("\n===== RESULTADOS FINALES =====")
+    print(f"Partidas jugadas: {partidas}")
+    print(f"Victorias de NereaJuditAgent: {victorias}")
+    print(f"Tasa de victoria: {victorias / partidas}")
