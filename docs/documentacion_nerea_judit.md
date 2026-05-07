@@ -366,6 +366,18 @@ Archivo: `docs/genetic_evaluation_standard_summary.csv`
 
 Esta prueba es importante porque el criterio de evaluacion indica que se valora ganar mas del 25% contra agentes estandar proporcionados, sin contar random. El agente genetico final obtiene una tasa de victoria del 63%, por encima de ese umbral.
 
+### Evaluacion contra 10000 partidas con RandomAgent
+
+Tambien se realizo la prueba opcional indicada en los criterios de evaluacion: comprobar si el agente gana mas de la mitad de 10000 partidas contra otros 3 agentes random. Para esto se creo el script `benchmark_random_nerea_judit.py`, que ejecuta muchas partidas del agente genetico final contra tres `RandomAgent` y guarda un resumen en CSV.
+
+Archivo: `docs/random_10000_summary.csv`
+
+| Partidas | Victorias | Tasa victoria | Puntos medios | Rondas medias |
+| --- | --- | --- | --- | --- |
+| 10000 | 9998 | 0.9998 | 10.04 | 25.88 |
+
+El resultado supera claramente el umbral del 50% indicado en los criterios, ya que el agente genetico final gano 9998 de 10000 partidas contra tres agentes random. Esto muestra que contra rivales aleatorios el comportamiento del agente es muy estable.
+
 ## 10. Uso de herramientas de IA
 
 Se ha usado ChatGPT como apoyo durante el desarrollo. El uso principal fue:
@@ -376,6 +388,7 @@ Se ha usado ChatGPT como apoyo durante el desarrollo. El uso principal fue:
 - comparar opciones de seleccion, cruce y mutacion;
 - revisar resultados y decidir anadir una fase de validacion final;
 - ayudar a crear el script de evaluacion comparativa entre la configuracion base y el agente genetico;
+- ayudar a preparar el benchmark opcional de 10000 partidas contra tres agentes random;
 - redactar comentarios explicativos en el codigo.
 
 En los archivos de codigo tambien se han dejado comentarios marcados con `USO IA` en algunas partes concretas donde se recibio apoyo, por ejemplo en la eleccion de genes, la funcion de fitness, la seleccion por torneo, la mutacion, la validacion final y la evaluacion comparativa.
