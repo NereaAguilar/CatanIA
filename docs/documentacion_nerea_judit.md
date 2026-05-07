@@ -12,32 +12,90 @@ Ademas del agente base, se creo una version parametrizable llamada `Agents/Genet
 
 El agente `NereaJuditAgent` fue probado dentro del simulador usando el archivo `run_execution.py`. En estas pruebas se configuro una partida con varios agentes del repositorio, incluyendo `RandomAgent`, `AdrianHerasAgent` y `AlexPastorAgent`.
 
-En una partida de ejemplo se pudieron ver varias acciones del agente:
+El objetivo de estas pruebas iniciales no era todavia entrenar el algoritmo genetico, sino comprobar que el agente base funcionaba dentro del simulador y que era capaz de tomar decisiones durante una partida completa. El fitness usado en estas primeras pruebas era sencillo: valia 1 si el agente ganaba la partida y 0 si no la ganaba.
+
+En una partida de ejemplo se pudieron ver varias acciones del agente. Aqui se muestra un fragmento amplio de la salida:
 
 ```text
+--- Partida 1 ---
 Compro carta de desarrollo
 Juego carta de soldado
 Juego carta de soldado al inicio
 Construyo una carretera entre: 10 y 2
 Compro carta de desarrollo
 Juego carta de construccion de carreteras
+Compro carta de desarrollo
+Juego carta de soldado
+Juego carta de soldado al inicio
+Compro carta de desarrollo
+Construyo una carretera entre: 2 y 1
+Compro carta de desarrollo
+Juego carta de soldado
+Juego carta de soldado al inicio
 Construyo una carretera entre: 1 y 0
 Construyo un pueblo en: 0
+Compro carta de desarrollo
+Juego carta de soldado
+Juego carta de soldado al inicio
+Compro carta de desarrollo
+Juego carta de construccion de carreteras
+Compro carta de desarrollo
+Construyo una carretera entre: 8 y 0
 Juego carta de monopolio
+Juego carta de monopolio
+Compro carta de desarrollo
+Juego carta de soldado
+Juego carta de soldado al inicio
+Compro carta de desarrollo
+Compro carta de desarrollo
+Juego carta de soldado
+Juego carta de soldado al inicio
+Compro carta de desarrollo
 Puntuacion de fitness calculada para el agente NereaJuditAgent: 1
 ```
 
-En esta salida se ve que el agente no solo construye, sino que tambien compra cartas, juega soldados, usa monopolio y construye carreteras y pueblos.
+En esta salida se ve que el agente no solo construye, sino que tambien compra cartas, juega soldados, usa monopolio, construye carreteras y llega a construir un pueblo. Esto demuestra que se activan varias de las funciones implementadas y que el agente no se queda parado durante la partida.
 
-Despues se hizo una primera prueba de 10 partidas. El resultado fue:
+Despues se hizo una primera prueba de 10 partidas. En esta prueba se registro el fitness de cada partida:
 
 ```text
+--- Partida 1 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 0
+
+--- Partida 2 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 1
+
+--- Partida 3 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 1
+
+--- Partida 4 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 0
+
+--- Partida 5 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 0
+
+--- Partida 6 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 1
+
+--- Partida 7 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 1
+
+--- Partida 8 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 1
+
+--- Partida 9 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 0
+
+--- Partida 10 ---
+Puntuacion de fitness calculada para el agente NereaJuditAgent: 1
+
+===== RESULTADOS FINALES =====
 Partidas jugadas: 10
 Victorias de NereaJuditAgent: 6
 Tasa de victoria: 0.60
 ```
 
-Estos resultados mostraron que el agente podia competir de forma estable en una muestra pequena. Aun asi, como Catan depende mucho del azar de dados, tablero y cartas, se hizo otra prueba mas amplia con 50 partidas:
+Estos resultados mostraron que el agente podia competir de forma estable en una muestra pequena, ya que gano mas de la mitad de las partidas ejecutadas. Aun asi, como Catan depende mucho del azar de dados, tablero y cartas, una prueba de 10 partidas puede ser demasiado corta. Por eso se hizo otra prueba mas amplia con 50 partidas:
 
 ```text
 Partidas jugadas: 50
@@ -45,7 +103,9 @@ Victorias de NereaJuditAgent: 22
 Tasa de victoria: 0.44
 ```
 
-La tasa bajo respecto a la prueba de 10 partidas, algo esperable al aumentar el numero de simulaciones y reducir el peso de partidas aisladas favorables. En conjunto, el agente base se considera funcional y estable, aunque todavia tiene margen de mejora estrategica.
+La tasa bajo respecto a la prueba de 10 partidas, algo esperable al aumentar el numero de simulaciones y reducir el peso de partidas aisladas favorables. En conjunto, estos resultados indican que el agente base es capaz de competir contra otros agentes del simulador. Aunque todavia existen muchas posibilidades de mejora estrategica, el comportamiento general del agente puede considerarse estable y funcional.
+
+Estas pruebas iniciales son importantes porque sirven como punto de partida antes de crear la version genetica. Primero comprobamos que la logica manual funcionaba y despues se transformaron varias de sus prioridades en genes entrenables.
 
 ## 2. Logica de las funciones implementadas
 

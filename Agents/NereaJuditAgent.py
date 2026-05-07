@@ -9,16 +9,13 @@ from Classes.DevelopmentCards import *
 from Classes.Hand import Hand
 
 
-class AgentInterface:
+class NereaJuditAgent(AgentInterface):
     """
     Interfaz que implementa a un agente
     """
 
     def __init__(self, agent_id):
-        self.hand = Hand()
-        self.board = Board()
-        self.development_cards_hand = DevelopmentCardsHand()
-        self.id = agent_id
+        super().__init__(agent_id)
 
     # Los triggers son llamados por el GameDirector las veces que sean necesarias hasta que devuelvan null
     #  o el GameDirector le niegue continuar el trigger
@@ -69,12 +66,12 @@ class AgentInterface:
         # y así bloquear a un rival o desbloquear nuestros propios recursos.
         # USO IA: No tenía claro qué hacer con las cartas en este turno, así que consulté cómo usarlas correctamente.
         knights = self.development_cards_hand.find_card_by_effect(
-            DevelopmentCardConstants.KNIGHT_EFFEC
+            DevelopmentCardConstants.KNIGHT_EFFECT
         )
         
         if knights:
             print("Juego carta de soldado al inicio")
-        return knights[0]
+            return knights[0]
     
         return None
 
