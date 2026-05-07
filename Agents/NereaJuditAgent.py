@@ -70,7 +70,7 @@ class NereaJuditAgent(AgentInterface):
         )
         
         if knights:
-            #print("Juego carta de soldado al inicio")
+            print("Juego carta de soldado al inicio")
             return knights[0]
     
         return None
