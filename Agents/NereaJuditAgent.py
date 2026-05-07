@@ -5,7 +5,7 @@ from Classes.TradeOffer import TradeOffer
 from Interfaces.AgentInterface import AgentInterface
 
 from Classes.Board import Board
-from Classes.DevelopmentCards import *
+from Classes.DevelopmentCards import * # type: ignore
 from Classes.Hand import Hand
 
 
@@ -140,7 +140,7 @@ class NereaJuditAgent(AgentInterface):
         )
         
         if knights:
-            print("Juego carta de soldado")
+            #print("Juego carta de soldado")
             return knights[0]
         
         # Tenemos CARTA CONTRUCCION DE CARRETERA
@@ -149,7 +149,7 @@ class NereaJuditAgent(AgentInterface):
         )
         
         if road_building:
-            print("Juego carta de construcción de carreteras")
+            #print("Juego carta de construcción de carreteras")
             return road_building[0]
 
         # Tenemos CARTA AÑO ABUNDANCIA
@@ -158,7 +158,7 @@ class NereaJuditAgent(AgentInterface):
         )
         
         if year_of_plenty:
-            print("Juego carta de año de abundancia")
+            #print("Juego carta de año de abundancia")
             return year_of_plenty[0]
 
         # Tenemos MONOPOLIO
@@ -167,7 +167,7 @@ class NereaJuditAgent(AgentInterface):
         )
         
         if monopoly:
-            print("Juego carta de monopolio")
+            #print("Juego carta de monopolio")
             return monopoly[0]
 
         return None
@@ -253,7 +253,7 @@ class NereaJuditAgent(AgentInterface):
 
             if valid_nodes:
                 nodo = valid_nodes[0]
-                print("Construyo ciudad en:", nodo)
+                #print("Construyo ciudad en:", nodo)
 
                 return {
                     "building": BuildConstants.CITY,
@@ -267,7 +267,7 @@ class NereaJuditAgent(AgentInterface):
 
             if valid_nodes:
                 nodo = valid_nodes[0]
-                print("Construyo un pueblo en:", nodo)
+                #print("Construyo un pueblo en:", nodo)
 
                 return {
                     "building": BuildConstants.TOWN,
@@ -277,7 +277,7 @@ class NereaJuditAgent(AgentInterface):
             
         # CARTA DE DESARROLLO
         if self.hand.resources.has_more(BuildConstants.CARD):
-            print("Compro carta de desarrollo")
+            #print("Compro carta de desarrollo")
 
             return {
                 "building": BuildConstants.CARD,
@@ -291,7 +291,7 @@ class NereaJuditAgent(AgentInterface):
 
             if valid_roads:
                 road = valid_roads[0]
-                print("Construyo una carretera entre:", road["starting_node"], "y", road["finishing_node"])
+                #print("Construyo una carretera entre:", road["starting_node"], "y", road["finishing_node"])
 
                 return {
                     "building": BuildConstants.ROAD,
